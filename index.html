@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Happy Birthday Neha 🎂</title>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;
+background:linear-gradient(135deg,#fff0f6,#f5e9ff);color:#4a2940;overflow-x:hidden}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px 16px}
+.card{max-width:900px;width:100%;background:#ffffffd9;backdrop-filter:blur(10px);border-radius:28px;
+padding:28px;box-shadow:0 20px 60px #7d3f6b25;text-align:center}
+h1{font-size:clamp(42px,9vw,78px);margin:5px 0 10px;color:#d43f78}
+h2{font-size:clamp(26px,5vw,40px);margin:0 0 10px}.sub{font-size:18px}
+button{border:0;border-radius:999px;padding:13px 22px;background:#d43f78;color:white;font-size:16px;
+cursor:pointer;box-shadow:0 8px 20px #d43f7840;margin:7px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:25px}
+.gallery img{width:100%;height:260px;object-fit:cover;border-radius:18px;box-shadow:0 8px 24px #0002}
+.message{font-size:19px;line-height:1.65;margin:24px auto;max-width:680px}
+.note{font-size:13px;opacity:.7;margin-top:18px}
+.confetti{position:fixed;top:-20px;font-size:24px;animation:fall linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.1}}
+.cake{font-size:70px;animation:bounce 1.2s infinite alternate}@keyframes bounce{to{transform:translateY(-8px)}}
+</style>
+</head>
+<body>
+<div class="hero">
+<div class="card">
+<div class="cake">🎂</div>
+<h1>Happy Birthday</h1>
+<h2>Neha 💖</h2>
+<p class="sub">Wishing you a beautiful day filled with smiles, happiness & wonderful memories.</p>
+<p class="message">
+May every new year of your life bring you more reasons to smile, more dreams to chase,
+and many unforgettable moments with the people who care about you. ✨<br><br>
+<strong>Happy Birthday, Neha! 🎉</strong>
+</p>
+<button onclick="celebrate()">🎈 Make a Wish</button>
+<button onclick="playTune()">🎵 Play Birthday Music</button>
+<div class="gallery">
+<img src="photo1.jpg" alt="Memory 1"><img src="photo2.jpg" alt="Memory 2">
+<img src="photo3.jpg" alt="Memory 3"><img src="photo4.jpg" alt="Memory 4">
+<img src="photo5.jpg" alt="Memory 5"><img src="photo6.jpg" alt="Memory 6">
+</div>
+<p class="note">Birthday: 2 April 2015 • Music is a small original browser melody, so no copyrighted song file is included.</p>
+</div>
+</div>
+<script>
+let ctx;
+function playTune(){
+  ctx = ctx || new (window.AudioContext||window.webkitAudioContext)();
+  const notes=[261.63,293.66,329.63,392,329.63,293.66,261.63,392,440,392,329.63,293.66];
+  notes.forEach((f,i)=>{
+    const o=ctx.createOscillator(), g=ctx.createGain();
+    o.type='sine'; o.frequency.value=f; g.gain.setValueAtTime(0,ctx.currentTime+i*.22);
+    g.gain.linearRampToValueAtTime(.12,ctx.currentTime+i*.22+.03);
+    g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+i*.22+.2);
+    o.connect(g).connect(ctx.destination); o.start(ctx.currentTime+i*.22); o.stop(ctx.currentTime+i*.22+.21);
+  });
+}
+function celebrate(){
+  for(let i=0;i<55;i++){
+    const e=document.createElement('div'); e.className='confetti';
+    e.textContent=['🎈','✨','💖','🎉','🌸'][Math.floor(Math.random()*5)];
+    e.style.left=Math.random()*100+'vw'; e.style.animationDuration=(2+Math.random()*3)+'s';
+    e.style.fontSize=(16+Math.random()*20)+'px'; document.body.appendChild(e);
+    setTimeout(()=>e.remove(),5500);
+  }
+}
+</script>
+</body>
+</html>
